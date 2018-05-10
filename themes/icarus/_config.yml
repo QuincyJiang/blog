@@ -49,7 +49,7 @@ search:
 
 # Comment
 comment:
-    disqus: https-quincyjiang-github-io
+    disqus: 
     duoshuo: # enter duoshuo shortname here
     youyan: # enter youyan uid here
     facebook: # enter true to enable
@@ -63,7 +63,7 @@ comment:
         #Register an OAuth application, and you will get a client ID and a client secret.
         client_id: #7d62ce84028d3cb98cc3
         client_secret: #dd706a971640c51eb81d8ad875b3409a03dd8aa6
-    livere: # enter livere uid here
+    livere: MTAyMC8zNjQwMS8xMjkzNg==
     valine: # Valine Comment System https://github.com/xCss/Valine
         on:  # enter true to enable
         appId:  # enter the leancloud application appId here
