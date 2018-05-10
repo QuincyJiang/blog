@@ -1,4 +1,4 @@
-title: mac搭建Pyqt5环境
+title: MQTT相关总结
 date: 2017/12/11 20:30:50
 categories: MQTT
 comments: true
