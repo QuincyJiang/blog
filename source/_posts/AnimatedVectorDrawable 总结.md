@@ -4,7 +4,7 @@ categories: CoolUI
 comments: true
 tags: [句柄animation,AnimatedVectorDrawable]
 ---
-我们在更新Android N之后 可能会注意到状态栏上的快捷方式 当我们点击的时候，从开启到关闭状态，会有一个顺滑自然的过渡动画，在学习完AnimatinVectorDrawable的api用法之后，你就会知道该怎么实现这些类似的效果了。
+在更新Android N之后 会注意到状态栏上的快捷方式有了新的变化 当我们点击的时候，从开启到关闭状态，会有一个顺滑自然的过渡动画，在学习完AnimatinVectorDrawable的api用法之后，你就会知道该怎么实现这些类似的效果了。
 
 ## Vector
 在开始之前，想先说明一下安卓中的矢量图标文件**Vector**

@@ -7,7 +7,6 @@ layout: "about"
 * Male
 * 24 (1993/08/19)
 * Major：ICS（Information and computer science）
-* School：SDU
 * Location：Guangzhou，China
 
 ### Contact：
@@ -15,7 +14,7 @@ layout: "about"
 * <jiang930625@gmail.com>
 
 ### Intro：	
-文艺码农，胶片玩家，代码洁癖。
+文艺码农，胶片玩家
 
 #### Language
 * Java	
