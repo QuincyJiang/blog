@@ -99,29 +99,21 @@
         padding: 10px 0
     blockquote
         position: static
-        font-family: font-serif
-        font-size: 1.1em
-        margin: 0 -20px
-        padding: 10px 20px 10px 54px
+        font-family: font-sans
+        font-size: 1em
+        margin: 0 0 1.3em 0
+        padding: 6px
         background: #fcfcfc
-        border-left: 4px solid #eee
-        &:before
-            top: 20px
-            left: 10px
-            content: "\f10d"
-            color: #e2e2e2
-            font-size: 32px;
-            font-family: FontAwesome
-            text-align: center
-            position: static
-        footer
-            font-size: font-size
-            margin: line-height 0
-            font-family: font-sans
-            cite
-                &:before
-                    content: "—"
-                    padding: 0 0.5em
+        border-left: 5px solid #ef9024
+        border-top: 1px solid $grey-light
+        border-bottom: 1px solid $grey-light
+        border-right: 1px solid $grey-light
+        cite::before {
+            content: "-";
+            padding: 0 5px;
+        }
+    blockquote p {
+        margin: 5px; }
     .pullquote
         text-align: left
         width: 45%
