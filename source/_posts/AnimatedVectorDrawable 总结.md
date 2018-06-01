@@ -47,31 +47,36 @@ Z: CLOSE  闭合曲线
 * trimPathStart: 绘制线段起始点偏移的百分比 
 * 
  这么说起来其实有点抽象，用一张图来解释会更加直观一些
-![image](https://note.youdao.com/yws/public/resource/fa0a00bd4972d5802d8ad504e9e623fc/xmlnote/A201CE3001F34F0E93FA08F8F18FB8D9/3433)
+
+![1](/media/1-1.png)
 
 
 ```xml
 android:trimPathStart="0"
 android:trimPathEnd="1"/>
 ```
+![2](/media/2-1.png)
 
-![image](https://note.youdao.com/yws/public/resource/fa0a00bd4972d5802d8ad504e9e623fc/xmlnote/437E587CB9704EDF953BFE1F60CDD79F/3436)
+
 ```xml
 android:trimPathStart="0"
 android:trimPathEnd="0.75"/>
 ```
-![image](https://note.youdao.com/yws/public/resource/fa0a00bd4972d5802d8ad504e9e623fc/xmlnote/073C2DBFC90C4B959DE5BB2CA7343E7F/3434)
+![3](/media/3-1.png)
+
 ```xml
 android:trimPathStart="0.5"
 android:trimPathEnd="0.75"/>
 ```
-![image](https://note.youdao.com/yws/public/resource/fa0a00bd4972d5802d8ad504e9e623fc/xmlnote/FA0FF500CEAD4F5EA9B19DFC8430BF14/3435)
+![4](/media/4.png)
+
 ```xml
 android:trimPathStart="0.25"
 android:trimPathEnd="0.75"
 android:trimPathOffset="0.25"/>
 ```
-![image](https://note.youdao.com/yws/public/resource/fa0a00bd4972d5802d8ad504e9e623fc/xmlnote/58466D2A0A82463C8BB0AA3C7FCF715C/3438)
+![5](/media/5-1.png)
+
 ```xml
 android:trimPathStart="0.25"
 android:trimPathEnd="0.75"
@@ -129,7 +134,8 @@ Rotate:
 
 #### 动画1
 
-![image](https://note.youdao.com/yws/public/resource/fa0a00bd4972d5802d8ad504e9e623fc/xmlnote/36520B59B24E40309D3F34AA4925F3A1/3505)
+![6](/media/6.gif)
+
 
 这是通过动态变换paths分组下的start end的偏移位置，做到x变为对号，同时通过groups分组下的
 translate 来动态改变位置图像在变化前后还保持中心位置
@@ -137,17 +143,20 @@ translate 来动态改变位置图像在变化前后还保持中心位置
 
 其实通过trim属性，我们可以做到更多炫酷的动画效果，可以先看下面这个动画
 
-![image](https://note.youdao.com/yws/public/resource/fa0a00bd4972d5802d8ad504e9e623fc/xmlnote/1AD156AC9EFE4D7BAA9CB4E3EF8D04E4/3520)
+![7](/media/7.gif)
+
 
 它的完整路径其实是这样的
+![8](/media/8.gif)
 
-![image](https://note.youdao.com/yws/public/resource/fa0a00bd4972d5802d8ad504e9e623fc/xmlnote/D1E2710E1D8146ECBBE830E7A12B6FF1/3523)
+
 
 只是通过变换trim的值，让其部分不可见便实现了上述效果
 
 ### 动画2
 
-![image](https://note.youdao.com/yws/public/resource/fa0a00bd4972d5802d8ad504e9e623fc/xmlnote/AA8F9653DD2E477EAA021A2FCC4098A9/3577)
+![9](/media/9.gif)
+
 
 本质是将碎裂的心分为两组图片，心的填充颜色默认为白色，点击填充是更改了透明度opacity，裂开的动画是使用groups中的rotation动画
 
@@ -170,15 +179,17 @@ translate 来动态改变位置图像在变化前后还保持中心位置
 **前后两条path路径 他们的绘制点数量和绘制命令必须是相同的
 就比如上面代码中 变换前是4个点 变换后也必须是四个点 而且 m l m l 的顺序不可以改变**
 
-![image](https://note.youdao.com/yws/public/resource/fa0a00bd4972d5802d8ad504e9e623fc/xmlnote/BFFB93AAA87E44B8A9B4A5CA7208BBA6/3579)
+![10](/media/10.gif)
+
 
 上面这种 两个正方形 大小变了 形状没变，我们可以选定点的四个点作为变换参考点，只需要改变下四个点的前后坐标就可以了，绘制流程是不变的，符合要求，但如果变换前后是这样的呢？
-![image](https://note.youdao.com/yws/public/resource/fa0a00bd4972d5802d8ad504e9e623fc/xmlnote/61824E98C71D434E922CF7AEE414E4C1/3581)
+
+![11](/media/11.gif)
 
 圆是没有顶点的，这时候只能变通一下，这样来选择四个点，同时要将连接点与点之间的命令由L （直线）改为C（曲线），这样可以通过控制贝塞尔曲线的控制点坐标，达到绘制圆弧和直线的效果。
 你可以通过设置更多的控制点 来达到更顺滑的变换效果
 
-![image](https://note.youdao.com/yws/public/resource/fa0a00bd4972d5802d8ad504e9e623fc/xmlnote/A2A9FA92731B4B9CA42B965207475945/3583)
+![12](/media/12.gif)
 
 
 进行path变换 因为要操作控制点坐标，也带来了下面几个问题
@@ -198,20 +209,26 @@ translate 来动态改变位置图像在变化前后还保持中心位置
 
 ##### 1. 上传两张svg图片
 分别表示的是变换前，变换后
-![image](https://note.youdao.com/yws/public/resource/fa0a00bd4972d5802d8ad504e9e623fc/xmlnote/WEBRESOURCE3158c893d5e0815abb83b97b2b4def10/3588)
+
+![13](/media/13.jpg)
 
 #### 2.复制第二个涂层的pathdata后，删除该图层
-![image](https://note.youdao.com/yws/public/resource/fa0a00bd4972d5802d8ad504e9e623fc/xmlnote/WEBRESOURCE060f9ae7adf7ce1c99f4c524c29d86fd/3589)
 
-![image](https://note.youdao.com/yws/public/resource/fa0a00bd4972d5802d8ad504e9e623fc/xmlnote/WEBRESOURCE61d5eb6a60bea13e3c6a8aef6bc538e2/3590)
+![14](/media/14.jpg)
+
+![15](/media/15-1.jpg)
+
+
 
 #### 3. 调整第一张图，选择要变换的数据是pathdata，并将变化后 也即第二张图的pathdata 粘贴进去
 
-![image](https://note.youdao.com/yws/public/resource/fa0a00bd4972d5802d8ad504e9e623fc/xmlnote/WEBRESOURCEb4fda6557ac02bfd5d6ac837eb1fe426/3593)
+
+![16](/media/16.jpg)
 
 这时候因为“+”和“-”的节点数不一致，会报错提示，可以点击修改pathdata 按钮去手动删减增加一些节点数据
 
-![image](https://note.youdao.com/yws/public/resource/fa0a00bd4972d5802d8ad504e9e623fc/xmlnote/WEBRESOURCE72cbd215442bfa5a09c6f4dedffa16d8/3596)
+
+![17](/media/17.jpg)
 
 #### 4.妥善选择好前后的节点位置，就可以点击下方播放按钮直观查看变化效果了，不满意可以修改节点，知道达到预期目标。
 
@@ -219,3 +236,4 @@ translate 来动态改变位置图像在变化前后还保持中心位置
 >待续
 >
 >-----------------18.5.9
+

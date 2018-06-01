@@ -9,12 +9,13 @@ Binder是Android系统中进程间通讯（IPC）的一种方式，也是Android
 
 理解Binder对于理解整个Android系统有着非常重要的作用，如果对Binder不了解，就很难对Android系统机制有更深入的理解。
 # 1. Binder架构
-![image](https://img-blog.csdn.net/20170411180827946?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZnJlZWtpdGV5dQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![binder_1](/media/binder_1-1.jpeg)
+
 * Binder 通信采用 C/S 架构，从组件视角来说，包含 Client、 Server、 ServiceManager 以及 Binder 驱动，其中 ServiceManager 用于管理系统中的各种服务。
 * Binder 在 framework 层进行了封装，通过 JNI 技术调用 Native（C/C++）层的 Binder 架构。
 * Binder 在 Native 层以 ioctl 的方式与 Binder 驱动通讯。
 # 2.Binder机制
-![image](https://img-blog.csdn.net/20170411180950468?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZnJlZWtpdGV5dQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![binder_2](/media/binder_2.jpeg)
 
 * 首先需要注册服务端，只有注册了服务端，客户端才有通讯的目标，服务端通过 ServiceManager 注册服务，注册的过程就是向 Binder 驱动的全局链表 binder_procs 中插入服务端的信息（binder_proc 结构体，每个 binder_proc 结构体中都有 todo 任务队列），然后向 ServiceManager 的 svcinfo 列表中缓存一下注册的服务。
 
@@ -35,8 +36,9 @@ Binder是Android系统中进程间通讯（IPC）的一种方式，也是Android
 
 # 3.Binder驱动
 我们先来了解下**用户空间**与**内核空间**是怎么交互的。
+![binder_3](/media/binder_3.jpeg)
 
-![image](https://img-blog.csdn.net/20170411181004953?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZnJlZWtpdGV5dQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
 
 先了解一些概念
 
@@ -68,7 +70,8 @@ Kernel space 可以执行任意命令，调用系统的一切资源； User spac
 熟悉了上面这些概念，我们再来看下上面的图，用户空间中 binder_open(), binder_mmap(), binder_ioctl() 这些方法通过 system call 来调用内核空间 Binder 驱动中的方法。内核空间与用户空间共享内存通过 copy_from_user(), copy_to_user() 内核方法来完成用户空间与内核空间内存的数据传输。 Binder驱动中有一个全局的 binder_procs 链表保存了服务端的进程信息。
 
 # 4. Binder 进程与线程
-![image](https://img-blog.csdn.net/20170411181022355?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZnJlZWtpdGV5dQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![binde](/media/binder4.jpeg)
+
 
 对于底层Binder驱动，通过 binder_procs 链表记录所有创建的 binder_proc 结构体，binder 驱动层的每一个 binder_proc 结构体都与用户空间的一个用于 binder 通信的进程一一对应，且每个进程有且只有一个 ProcessState 对象，这是通过单例模式来保证的。在每个进程中可以有很多个线程，每个线程对应一个 IPCThreadState 对象，IPCThreadState 对象也是单例模式，即一个线程对应一个 IPCThreadState 对象，在 Binder 驱动层也有与之相对应的结构，那就是 Binder_thread 结构体。在 binder_proc 结构体中通过成员变量 rb_root threads，来记录当前进程内所有的 binder_thread。
 
@@ -76,7 +79,8 @@ Binder 线程池：每个 Server 进程在启动时创建一个 binder 线程池
 
 # 5. ServiceManager 启动
 了解了 Binder 驱动，怎么与 Binder 驱动进行通讯呢？那就是通过 ServiceManager，好多文章称 ServiceManager 是 Binder 驱动的守护进程，大管家，其实 ServiceManager 的作用很简单就是提供了查询服务和注册服务的功能。下面我们来看一下 ServiceManager 启动的过程。
-![image](https://img-blog.csdn.net/20170411181034027?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZnJlZWtpdGV5dQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![binde](/media/binder5.jpeg)
+
 
 - ServiceManager 分为 framework 层和 native 层，framework 层只是对 native 层进行了封装方便调用，图上展示的是 native 层的 ServiceManager 启动过程。
 
@@ -86,7 +90,8 @@ Binder 线程池：每个 Server 进程在启动时创建一个 binder 线程池
 
 # 6. ServiceManager 注册服务
 
-![image](https://img-blog.csdn.net/20170411181047406?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZnJlZWtpdGV5dQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![binde](/media/binder6.jpeg)
+
 
 * 注册 MediaPlayerService 服务端，我们通过 ServiceManager 的 addService() 方法来注册服务。
 
@@ -96,7 +101,8 @@ Binder 线程池：每个 Server 进程在启动时创建一个 binder 线程池
 
 # 7. ServiceManager 获取服务
 
-![image](https://img-blog.csdn.net/20170411181102125?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZnJlZWtpdGV5dQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![binde](/media/binder7.jpeg)
+
 
 * 获取服务的过程与注册类似，相反的过程。通过 ServiceManager 的 getService() 方法来注册服务。
 
@@ -105,7 +111,8 @@ Binder 线程池：每个 Server 进程在启动时创建一个 binder 线程池
 * Binder 驱动收到请求命令向 ServiceManager 的发送 BC_TRANSACTION 查询已注册的服务，查询到直接响应 BR_REPLY 唤醒等待的线程。若查询不到将与 binder_procs 链表中的服务进行一次通讯再响应。
 * 
 # 8. 进行一次完整通讯
-![image](https://img-blog.csdn.net/20170411180851093?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZnJlZWtpdGV5dQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+![binde](/media/binder8.jpeg)
 
 * 我们在使用 Binder 时基本都是调用 framework 层封装好的方法，AIDL 就是 framework 层提供的傻瓜式是使用方式。假设服务已经注册完，我们来看看客户端怎么执行服务端的方法。
 
@@ -122,3 +129,4 @@ Binder 线程池：每个 Server 进程在启动时创建一个 binder 线程池
 3. Innost的 [深入理解Binder](http://blog.csdn.net/innost/article/details/47208049) 系列 
 4. Gityuan的 [Binder系列](http://gityuan.com/2015/10/31/binder-prepare) (基于 Android 6.0) 
 5.[ Binder学习指南](http://weishu.me/2016/01/12/binder-index-for-newer)
+

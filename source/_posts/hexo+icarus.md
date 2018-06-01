@@ -213,6 +213,7 @@ miscellaneous:
         github: https://github.com/QuincyJiang
 
 ```
+
 # 托管hexo博客源码
 为了保证切换电脑也可以保留原博客的风格，我们需要将博客的配置用git托管起来
 ### 1.创建hexo源码仓库
@@ -255,6 +256,25 @@ git commit -m "init commit"
 git push -u origin master
 ```
 
+# 关于博客贴图
+一般使用md文件写博客的时候，贴图是最痛苦的事情，一般是现将图片上传到图床之后，再获取图片链接。
+这边安利一个软件 Mweb md文件编辑器，它可以用拖拽的方式来贴图，图片可以直接上传到github上。[官网地址了解一下](http://zh.mweb.im/)
+
+用法非常简单
+### 下载安装
+### 选择外部模式 
+![](/media/15271330198211.jpg)
+
+### 点击右下角的加号 将hexo 博客的source文件夹添加进去
+### 编辑该folders，右键点击folder
+
+![](/media/15271331311378.jpg)
+
+### 选择图片保存路径以及路径类型
+
+![](/media/15271331832680.jpg)
+
+
 # 切换电脑后重新恢复博客环境
 
 ### 克隆博客源码
@@ -279,3 +299,4 @@ npm install hexo-server
 npm install
 ```
 至此hexo安装完成，回到熟悉的source/_post 目录愉快开始写作吧
+
