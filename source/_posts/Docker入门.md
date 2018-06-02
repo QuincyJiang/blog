@@ -101,7 +101,7 @@ $ sudo service docker start
 $ sudo systemctl start docker
 ```
 
-#六、image 文件
+# 六、image 文件
 Docker 把应用程序及其依赖，打包在 image 文件里面。只有通过这个文件，才能生成 Docker 容器。image 文件可以看作是容器的模板。Docker 根据 image 文件生成容器的实例。同一个 image 文件，可以生成多个同时运行的容器实例。
 
 image 是二进制文件。实际开发中，一个 image 文件往往通过继承另一个 image 文件，加上一些个性化设置而生成。举例来说，你可以在 Ubuntu 的 image 基础上，往里面加入 Apache 服务器，形成你的 image。
@@ -119,7 +119,7 @@ image 文件是通用的，一台机器的 image 文件拷贝到另一台机器�
 
 为了方便共享，image 文件制作完成后，可以上传到网上的仓库。Docker 的官方仓库 Docker Hub 是最重要、最常用的 image 仓库。此外，出售自己制作的 image 文件也是可以的。
 
-#七、实例：hello world
+# 七、实例：hello world
 下面，我们通过最简单的 image 文件"hello world"，感受一下 Docker。
 
 需要说明的是，国内连接 Docker 的官方仓库很慢，还会断线，需要将默认仓库改成国内的镜像网站，具体的修改方法在下一篇文章的第一节。有需要的朋友，可以先看一下。
@@ -169,7 +169,7 @@ This message shows that your installation appears to be working correctly.
 
 `$ docker container kill [containID]
 `
-#八、容器文件
+# 八、容器文件
 image 文件生成的容器实例，本身也是一个文件，称为容器文件。也就是说，一旦容器生成，就会同时存在两个文件： image 文件和容器文件。而且关闭容器并不会删除容器文件，只是容器停止运行而已。
 
 
@@ -205,7 +205,7 @@ $ docker container ls --all
 $ git clone https://github.com/ruanyf/koa-demos.git
 $ cd koa-demos
 ```
-###10.1 编写 Dockerfile 文件
+### 10.1 编写 Dockerfile 文件
 首先，在项目的根目录下，新建一个文本文件`.dockerignore`，写入下面的内容。
 
 
