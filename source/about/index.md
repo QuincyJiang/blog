@@ -1,7 +1,9 @@
 title: "About"
 layout: "about"
 ---
-<img src="http://ou61qboep.bkt.clouddn.com/122.jpg" width="200" height="200" align=left/>
+
+![](/media/15280387371461.jpg)
+
 ### Name：
 * Quincyjiang	
 * Male
@@ -21,3 +23,5 @@ layout: "about"
 * Android
 * Python	
 * C/C++
+
+
