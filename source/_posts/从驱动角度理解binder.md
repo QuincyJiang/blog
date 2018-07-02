@@ -366,6 +366,9 @@ enum {
 当对象传递到Binder驱动中的时候，由驱动来进行翻译和解释，然后传递到接收的进程。
 
 例如当Server把Binder实体传递给Client时，在发送数据流中，`flat_binder_object`中的type是`BINDER_TYPE_BINDER`，同时binder字段指向Server进程用户空间地址。但这个地址对于Client进程是没有意义的（Linux中，每个进程的地址空间是互相隔离的），驱动必须对数据流中的`flat_binder_object`做相应的翻译：将type该成`BINDER_TYPE_HANDLE`；为这个Binder在接收进程中创建位于内核中的引用并将引用号填入handle中。对于发生数据流中引用类型的Binder也要做同样转换。经过处理后接收进程从数据流中取得的Binder引用才是有效的，才可以将其填入数据包`binder_transaction_data`的`target.handle`域，向Binder实体发送请求。
+![](/media/15299006076637.jpg)
+图 binder对象索引和映射关系
+`flat_binder_object`就是进程间传递的`Binder`对象，每一个`flat_binder_object`对象内核都有一个唯一的`binder_node`对象，这个对象挂接在`binder_proc`的一颗二叉树上。对于一个`binder_node`对象，内核也会有一个唯一的`binder_ref`对象，可以这么理解，`binder_ref`的`desc`唯一的映射到`binder_node`的`ptr`和`cookie`上，同时也唯一的映射到了`flat_binder_object`的`handler`上。而`binder_ref`又按照`node`和`desc`两种方式映射到`binder_proc`对象上，也就是可以通过`binder_node`对象或者`desc`两种方式在`binder_proc`上查找到`binder_ref`或`binder_node`。所以，对于`flat_binder_object`对象来说，它的`binder+cookie`和`handler`指向了同一个`binder_node`对象上，即同一个`binder`对象。
 
 由于每个请求和请求的返回都会经历内核的翻译，因此这个过程从进程的角度来看是完全透明的。进程完全不用感知这个过程，就好像对象真的在进程间来回传递一样。
 

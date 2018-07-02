@@ -2,7 +2,8 @@ title: "About"
 layout: "about"
 ---
 
-![](/media/15280387371461.jpg)
+![15280387371461](/media/15280387371461-1.jpg)
+
 
 ### Name：
 * Quincyjiang	
@@ -18,10 +19,11 @@ layout: "about"
 ### Intro：	
 文艺码农，胶片玩家
 
-#### Language
+#### skill
 * Java	
 * Android
 * Python	
 * C/C++
+* CV(Computer vison)
 
 
