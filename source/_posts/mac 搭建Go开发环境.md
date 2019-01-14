@@ -1,3 +1,11 @@
+title:mac 搭建Go开发环境
+date: 2019/01/14 13:18:50
+categories: 后端技术
+comments: true
+tags: [后端技术,go]
+---
+
+
 本文基于macos 10.13.6 ，采用vim+go插件的方式，包括了配置vim语法高亮，自动补全等设置。
 #  一、安装Golang
  
