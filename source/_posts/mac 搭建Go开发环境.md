@@ -1,4 +1,4 @@
-title:mac 搭建Go开发环境
+title: mac 搭建Go开发环境
 date: 2019/01/14 13:18:50
 categories: 后端技术
 comments: true
