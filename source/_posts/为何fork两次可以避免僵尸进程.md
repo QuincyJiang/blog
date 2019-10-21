@@ -1,4 +1,4 @@
-title:为何fork两次可以避免僵尸进程
+title: 为何fork两次可以避免僵尸进程
 date: 2019/10/21 16:30:15
 categories: Linux
 comments: true
