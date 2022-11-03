@@ -23,7 +23,7 @@
     "eslint-config-alloy": "^1.4.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.2",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-sass": "^3.1.0",
     "prettier": "1.14.2",
     "uglifyjs-webpack-plugin": "^1.1.8",
